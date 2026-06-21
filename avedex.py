@@ -1,42 +1,149 @@
-print("=" * 40)
-print(" AVEDEX")
-print("=" * 40)
+def exibir_linha():
+    print("=" * 50)
 
-nome_usuario = input("Digite seu nome: ").strip()
-opcao_menu = ""
 
-while opcao_menu != "0":
+def exibir_menu():
     print()
-    print("=" * 40)
-    print("MENU PRINCIPAL")
-    print("=" * 40)
+    exibir_linha()
+    print("AVEDEX - MENU PRINCIPAL")
+    exibir_linha()
     print("1 - Ver mensagem de boas-vindas")
-    print("2 - Conhecer uma ave")
-    print("3 - Ver uma curiosidade sobre aves")
+    print("2 - Listar aves")
+    print("3 - Ver detalhes de uma ave")
     print("4 - Sobre a AveDex")
     print("0 - Sair")
 
+
+def mostrar_boas_vindas(nome_usuario):
+    print(f"Olá, {nome_usuario}!")
+    print("Seja bem-vindo(a) à AveDex.")
+    print("Aqui vamos conhecer aves e praticar boas práticas.")
+
+
+def listar_aves(catalogo):
+    print()
+    exibir_linha()
+    print("AVES CADASTRADAS")
+    exibir_linha()
+
+    for ave in catalogo:
+        print(f"{ave['codigo']} - {ave['nome_popular']}")
+
+
+def buscar_ave_por_codigo(catalogo, codigo_procurado):
+    for ave in catalogo:
+        if ave["codigo"] == codigo_procurado:
+            return ave
+
+    return None
+
+
+def exibir_detalhes(ave):
+    print()
+    exibir_linha()
+    print("DETALHES DA AVE")
+    exibir_linha()
+
+    print(f"Nome popular: {ave['nome_popular']}")
+    print(f"Nome científico: {ave['nome_cientifico']}")
+    print(f"Habitat: {ave['habitat']}")
+    print(f"Alimentação: {ave['alimentacao']}")
+    print(f"Curiosidade: {ave['curiosidade']}")
+
+
+def mostrar_sobre():
+    print("Sobre a AveDex:")
+    print("A AveDex é um catálogo interativo de aves.")
+    print("O projeto evolui durante a disciplina de Boas Práticas.")
+
+
+def pausar():
+    input("\nPressione ENTER para voltar ao menu...")
+
+
+catalogo_aves = [
+    {
+        "codigo": "1",
+        "nome_popular": "Bem-te-vi",
+        "nome_cientifico": "Pitangus sulphuratus",
+        "habitat": "Áreas abertas e cidades",
+        "alimentacao": "Insetos, frutos e pequenos animais",
+        "curiosidade": "Seu canto lembra a expressão bem-te-vi."
+    },
+    {
+        "codigo": "2",
+        "nome_popular": "Canário-da-terra",
+        "nome_cientifico": "Sicalis flaveola",
+        "habitat": "Campos e áreas rurais",
+        "alimentacao": "Sementes e pequenos insetos",
+        "curiosidade": "O macho possui plumagem amarela intensa."
+    },
+    {
+        "codigo": "3",
+        "nome_popular": "João-de-barro",
+        "nome_cientifico": "Furnarius rufus",
+        "habitat": "Campos, cidades e áreas rurais",
+        "alimentacao": "Insetos e pequenos invertebrados",
+        "curiosidade": "Constrói ninhos de barro."
+    },
+    {
+        "codigo": "4",
+        "nome_popular": "Arara-azul",
+        "nome_cientifico": "Anodorhynchus hyacinthinus",
+        "habitat": "Pantanal e Cerrado",
+        "alimentacao": "Frutos e sementes",
+        "curiosidade": "É uma das maiores araras do mundo."
+    },
+    {
+        "codigo": "5",
+        "nome_popular": "Tucano-toco",
+        "nome_cientifico": "Ramphastos toco",
+        "habitat": "Florestas e Cerrado",
+        "alimentacao": "Frutas, ovos e pequenos animais",
+        "curiosidade": "Possui um bico que pode chegar a 20 cm."
+    }
+]
+
+print("=" * 50)
+print("AVEDEX")
+print("=" * 50)
+
+nome_usuario = input("Digite seu nome: ").strip()
+
+opcao_menu = ""
+
+while opcao_menu != "0":
+    exibir_menu()
+
     opcao_menu = input("Escolha uma opção: ").strip()
+
     print()
 
     if opcao_menu == "1":
-        print(f"Olá, {nome_usuario}!")
-        print("Seja bem-vindo(a) à AveDex.")
-        print("Aqui vamos conhecer aves e praticar boas práticas de programação.")
+        mostrar_boas_vindas(nome_usuario)
 
     elif opcao_menu == "2":
-        print("Ave escolhida: Bem-te-vi")
-        print("Nome científico: Pitangus sulphuratus")
-        print("O bem-te-vi é uma das aves mais conhecidas do Brasil.")
+        listar_aves(catalogo_aves)
 
     elif opcao_menu == "3":
-        print("Curiosidade:")
-        print("Muitas aves ajudam no equilíbrio ambiental ao dispersar sementes.")
+        listar_aves(catalogo_aves)
+
+        codigo_escolhido = input(
+            "\nDigite o código da ave: "
+        ).strip()
+
+        ave_encontrada = buscar_ave_por_codigo(
+            catalogo_aves,
+            codigo_escolhido
+        )
+
+        if ave_encontrada is not None:
+            exibir_detalhes(ave_encontrada)
+        else:
+            print("Ave não encontrada.")
 
     elif opcao_menu == "4":
-        print("Sobre a AveDex:")
-        print("A AveDex será um catálogo interativo de aves.")
-        print("Ao longo da disciplina, adicionaremos novas funcionalidades.")
+        mostrar_sobre()
 
     elif opcao_menu == "0":
         print("Encerrando a AveDex.")
@@ -46,4 +153,4 @@ while opcao_menu != "0":
         print("Opção inválida. Digite apenas 0, 1, 2, 3 ou 4.")
 
     if opcao_menu != "0":
-        input("\nPressione ENTER para voltar ao menu...")
+        pausar()
