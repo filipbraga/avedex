@@ -29,13 +29,11 @@ def listar_aves(catalogo):
     for ave in catalogo:
         print(f"{ave['codigo']} - {ave['nome_popular']}")
 
-def buscar_ave_por_codigo(catalogo, codigo_procurado):
+def buscar_ave_por_id(catalogo, id_procurado):
     for ave in catalogo:
-        if ave["codigo"] == codigo_procurado:
+        if str(ave["codigo"]) == id_procurado:
             return ave
-
     return None
-
 
 def exibir_detalhes(ave):
     print()
@@ -131,7 +129,7 @@ while opcao_menu != "0":
             "\nDigite o código da ave: "
         ).strip()
 
-        ave_encontrada = buscar_ave_por_codigo(
+        ave_encontrada = buscar_ave_por_id(
             catalogo_aves,
             codigo_escolhido
         )
@@ -153,3 +151,6 @@ while opcao_menu != "0":
 
     if opcao_menu != "0":
         pausar()
+
+
+
