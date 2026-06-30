@@ -1,5 +1,6 @@
+
 def exibir_linha():
-    print("=" * 50)
+    print("=" * 25)
 
 
 def exibir_menu():
@@ -22,13 +23,11 @@ def mostrar_boas_vindas(nome_usuario):
 
 def listar_aves(catalogo):
     print()
-    exibir_linha()
+    print("=" * 50)
     print("AVES CADASTRADAS")
-    exibir_linha()
-
+    print("=" * 50)
     for ave in catalogo:
         print(f"{ave['codigo']} - {ave['nome_popular']}")
-
 
 def buscar_ave_por_codigo(catalogo, codigo_procurado):
     for ave in catalogo:
