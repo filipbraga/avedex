@@ -23,3 +23,11 @@ Catálogo interativo de aves desenvolvido na disciplina **Boas Práticas de Prog
 
 ```bash
 python avedex.py
+
+
+## Testes manuais realizados
+- [x] Listagem de aves
+- [x] Seleção de ave por ID existente
+- [x] Seleção de ave por ID inexistente
+- [x] Opção inválida no menu
+- [x] Encerramento do programa
