@@ -2,6 +2,8 @@
 def exibir_linha():
     print("=" * 25)
 
+    
+
 
 def exibir_menu():
     print()
@@ -27,11 +29,11 @@ def listar_aves(catalogo):
     print("AVES CADASTRADAS")
     print("=" * 50)
     for ave in catalogo:
-        print(f"{ave['codigo']} - {ave['nome_popular']}")
+        print(f"{ave['id']} - {ave['nome_popular']}")
 
 def buscar_ave_por_id(catalogo, id_procurado):
     for ave in catalogo:
-        if str(ave["codigo"]) == id_procurado:
+        if str(ave["id"]) == id_procurado:
             return ave
     return None
 
@@ -60,41 +62,63 @@ def pausar():
 
 catalogo_aves = [
     {
-        "codigo": "1",
+        # Identificador único da ave.
+        # Usamos o ID para escolher uma ave no menu.
+        "id": 1,
+        # Nome mais conhecido da ave.
         "nome_popular": "Bem-te-vi",
+        # Nome científico da espécie.
         "nome_cientifico": "Pitangus sulphuratus",
+        # Classificação taxonômica.
+        "ordem": "Passeriformes",
+        "familia": "Tyrannidae",
+        # Tipo principal de dieta.
+        "dieta_tipo": "Onívora",
+        # Informações descritivas usadas nos detalhes.
         "habitat": "Áreas abertas e cidades",
         "alimentacao": "Insetos, frutos e pequenos animais",
         "curiosidade": "Seu canto lembra a expressão bem-te-vi."
     },
     {
-        "codigo": "2",
+        "id": 2,
         "nome_popular": "Canário-da-terra",
         "nome_cientifico": "Sicalis flaveola",
+        "ordem": "Passeriformes",
+        "familia": "Thraupidae",
+        "dieta_tipo": "Granívora",
         "habitat": "Campos e áreas rurais",
         "alimentacao": "Sementes e pequenos insetos",
         "curiosidade": "O macho possui plumagem amarela intensa."
     },
     {
-        "codigo": "3",
+        "id": 3,
         "nome_popular": "João-de-barro",
         "nome_cientifico": "Furnarius rufus",
+        "ordem": "Passeriformes",
+        "familia": "Furnariidae",
+        "dieta_tipo": "Insetívora",
         "habitat": "Campos, cidades e áreas rurais",
         "alimentacao": "Insetos e pequenos invertebrados",
         "curiosidade": "Constrói ninhos de barro."
     },
     {
-        "codigo": "4",
+        "id": 4,
         "nome_popular": "Arara-azul",
         "nome_cientifico": "Anodorhynchus hyacinthinus",
+        "ordem": "Psittaciformes",
+        "familia": "Psittacidae",
+        "dieta_tipo": "Granívora",  # Alimenta-se principalmente de sementes e frutos de palmeiras
         "habitat": "Pantanal e Cerrado",
         "alimentacao": "Frutos e sementes",
         "curiosidade": "É uma das maiores araras do mundo."
     },
     {
-        "codigo": "5",
+        "id": 5,
         "nome_popular": "Tucano-toco",
         "nome_cientifico": "Ramphastos toco",
+        "ordem": "Piciformes",
+        "familia": "Ramphastidae",
+        "dieta_tipo": "Onívora",     # Alimenta-se de frutos, mas também de ovos e pequenos animais
         "habitat": "Florestas e Cerrado",
         "alimentacao": "Frutas, ovos e pequenos animais",
         "curiosidade": "Possui um bico que pode chegar a 20 cm."
