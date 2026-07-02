@@ -1,8 +1,5 @@
-
 def exibir_linha():
     print("=" * 25)
-
-    
 
 
 def exibir_menu():
@@ -12,8 +9,9 @@ def exibir_menu():
     exibir_linha()
     print("1 - Ver mensagem de boas-vindas")
     print("2 - Listar aves")
-    print("3 - Ver detalhes de uma ave")
-    print("4 - Sobre a AveDex")
+    print("3 - Ver detalhes de uma ave (por ID)")
+    print("4 - Buscar ave por nome")  # <-- Nova opção adicionada
+    print("5 - Sobre a AveDex")        # <-- Mudou de 4 para 5
     print("0 - Sair")
 
 
@@ -31,11 +29,13 @@ def listar_aves(catalogo):
     for ave in catalogo:
         print(f"{ave['id']} - {ave['nome_popular']}")
 
+
 def buscar_ave_por_id(catalogo, id_procurado):
     for ave in catalogo:
         if str(ave["id"]) == id_procurado:
             return ave
     return None
+
 
 def exibir_detalhes(ave):
     print()
@@ -50,6 +50,17 @@ def exibir_detalhes(ave):
     print(f"Curiosidade: {ave['curiosidade']}")
 
 
+def buscar_aves_por_nome(catalogo, termo_busca):
+    resultados = []
+    termo_busca_lower = termo_busca.lower()
+    
+    for ave in catalogo:
+        nome = ave["nome_popular"].lower()
+        if termo_busca_lower in nome:
+            resultados.append(ave)
+    return resultados
+
+
 def mostrar_sobre():
     print("Sobre a AveDex:")
     print("A AveDex é um catálogo interativo de aves.")
@@ -62,19 +73,12 @@ def pausar():
 
 catalogo_aves = [
     {
-        # Identificador único da ave.
-        # Usamos o ID para escolher uma ave no menu.
         "id": 1,
-        # Nome mais conhecido da ave.
         "nome_popular": "Bem-te-vi",
-        # Nome científico da espécie.
         "nome_cientifico": "Pitangus sulphuratus",
-        # Classificação taxonômica.
         "ordem": "Passeriformes",
         "familia": "Tyrannidae",
-        # Tipo principal de dieta.
         "dieta_tipo": "Onívora",
-        # Informações descritivas usadas nos detalhes.
         "habitat": "Áreas abertas e cidades",
         "alimentacao": "Insetos, frutos e pequenos animais",
         "curiosidade": "Seu canto lembra a expressão bem-te-vi."
@@ -107,7 +111,7 @@ catalogo_aves = [
         "nome_cientifico": "Anodorhynchus hyacinthinus",
         "ordem": "Psittaciformes",
         "familia": "Psittacidae",
-        "dieta_tipo": "Granívora",  # Alimenta-se principalmente de sementes e frutos de palmeiras
+        "dieta_tipo": "Granívora",  
         "habitat": "Pantanal e Cerrado",
         "alimentacao": "Frutos e sementes",
         "curiosidade": "É uma das maiores araras do mundo."
@@ -118,7 +122,7 @@ catalogo_aves = [
         "nome_cientifico": "Ramphastos toco",
         "ordem": "Piciformes",
         "familia": "Ramphastidae",
-        "dieta_tipo": "Onívora",     # Alimenta-se de frutos, mas também de ovos e pequenos animais
+        "dieta_tipo": "Onívora",     
         "habitat": "Florestas e Cerrado",
         "alimentacao": "Frutas, ovos e pequenos animais",
         "curiosidade": "Possui um bico que pode chegar a 20 cm."
@@ -163,7 +167,18 @@ while opcao_menu != "0":
         else:
             print("Ave não encontrada.")
 
-    elif opcao_menu == "4":
+    elif opcao_menu == "4":  
+        termo = input("Digite o nome (ou parte do nome) da ave: ").strip()
+        aves_encontradas = buscar_aves_por_nome(catalogo_aves, termo)
+        
+        if len(aves_encontradas) > 0:
+            print(f"\nAve(s) encontrada(s) com o termo '{termo}':")
+            for ave in aves_encontradas:
+                exibir_detalhes(ave)
+        else:
+            print(f"Nenhuma ave encontrada com o termo '{termo}'.")
+
+    elif opcao_menu == "5":  # <-- Mudou de 4 para 5
         mostrar_sobre()
 
     elif opcao_menu == "0":
@@ -171,10 +186,11 @@ while opcao_menu != "0":
         print(f"Até logo, {nome_usuario}!")
 
     else:
-        print("Opção inválida. Digite apenas 0, 1, 2, 3 ou 4.")
+        # Atualizado para incluir o número 5
+        print("Opção inválida. Digite apenas 0, 1, 2, 3, 4 ou 5.")
 
     if opcao_menu != "0":
         pausar()
 
-
-
+resultados_teste = buscar_aves_por_nome(catalogo_aves,"barro")
+print(resultados_teste)
